@@ -1,7 +1,14 @@
 # Google Spreadsheets Connector for Microsoft Power BI
 
-To make it run add client_id.txt and client_secret.txt containing your Google API client credentials generated in:
-https://console.developers.google.com/
 
+To make this connector work fully securely use this tutorial:
+http://www.skolenipowerbi.cz/l/google-drive-connector-kompletni-pruvodce/
+
+
+If you need just an a quick way to connect to Google Drive, use this tutorial:
+http://www.skolenipowerbi.cz/l/google-drive-connector-compact-tutorial/
+
+
+Hope you enjoy the Google Spreadsheets Connector.
 
 
