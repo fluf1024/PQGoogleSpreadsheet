@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{4DF76451-A46A-4C0B-BE03-459FAAFA07E6}") = "PQGoogleSpreadsheet", "PQGoogleSpreadsheet\PQGoogleSpreadsheet.mproj", "{5FC253AB-138A-42B9-84B6-B945884DB21A}"
+Project("{4DF76451-A46A-4C0B-BE03-459FAAFA07E6}") = "PQGoogleSpreadsheet", "PQGoogleSpreadsheet\PQGoogleSpreadsheet.mproj", "{9CB7D372-FCF5-490B-85E0-A081C11CA975}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,16 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5FC253AB-138A-42B9-84B6-B945884DB21A}.Debug|x86.ActiveCfg = Debug|x86
-		{5FC253AB-138A-42B9-84B6-B945884DB21A}.Debug|x86.Build.0 = Debug|x86
-		{5FC253AB-138A-42B9-84B6-B945884DB21A}.Release|x86.ActiveCfg = Release|x86
-		{5FC253AB-138A-42B9-84B6-B945884DB21A}.Release|x86.Build.0 = Release|x86
+		{9CB7D372-FCF5-490B-85E0-A081C11CA975}.Debug|x86.ActiveCfg = Debug|x86
+		{9CB7D372-FCF5-490B-85E0-A081C11CA975}.Debug|x86.Build.0 = Debug|x86
+		{9CB7D372-FCF5-490B-85E0-A081C11CA975}.Debug|x86.Deploy.0 = Debug|x86
+		{9CB7D372-FCF5-490B-85E0-A081C11CA975}.Release|x86.ActiveCfg = Release|x86
+		{9CB7D372-FCF5-490B-85E0-A081C11CA975}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCEB6D4B-AACB-444F-B9C8-12CB586B277A}
 	EndGlobalSection
 EndGlobal

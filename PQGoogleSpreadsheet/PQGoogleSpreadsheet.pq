@@ -30,6 +30,8 @@ PQGoogleSpreadsheet = [
         OAuth = [
             StartLogin = StartLogin,
             FinishLogin = FinishLogin,
+            Logout = Logout,
+            Refresh = Refresh,
             Label = "Google Spreadsheet Auth"
         ]
     ],
@@ -72,11 +74,23 @@ TokenMethod = (code) =>
                 client_secret = client_secret,
                 code = code,
                 grant_type = "authorization_code",
+                access_type = "offline",
                 redirect_uri = redirect_uri])),
-            Headers=[#"Content-type" = "application/x-www-form-urlencoded", #"Accept" = "application/json"]]),
-        Parts = Json.Document(Response)
+            Headers=[#"Content-type" = "application/x-www-form-urlencoded", #"Accept" = "application/json"],
+            ManualStatusHandling = {400}
+        ]),
+        Body = Json.Document(Response),
+        Result = if Record.HasFields(Body, {"error", "error_description"}) then 
+                error Error.Record(Body[error], Body[error_description], Body)
+            else
+                Body
     in
-        Parts;
+        Result;
+
+
+Refresh = (resourceUrl, refresh_token) => TokenMethod("refresh_token", "refresh_token", refresh_token);
+
+Logout = (token) => "https://accounts.google.com/o/oauth2/revoke?token=" & token;
 
 
 // Data Source UI publishing description
