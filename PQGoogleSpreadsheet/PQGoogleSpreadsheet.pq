@@ -24,10 +24,35 @@ shared PQGoogleSpreadsheet.Contents = Value.ReplaceType(PQGoogleSpreadsheetCore.
 shared PQGoogleSpreadsheetCore.Contents = (url as text) =>
     let
         finalUrl = Text.BeforeDelimiter(url, "/", {0, RelativePosition.FromEnd}) & "/export?format=xlsx",
-        content = Web.Contents(finalUrl),
-        excel = Excel.Workbook(content, null, true)
+        excel = Web.ContentsCustomRetry(finalUrl)
     in
-        excel;
+        Excel.Workbook(excel, null, true); 
+
+// https://gist.github.com/CurtHagenlocher/68ac18caa0a17667c805
+Web.ContentsCustomRetry = (url as text, optional options as record) => Value.WaitFor(
+        (i) =>
+            let
+                options2 = if options = null then [] else options,
+                options3 = if i=0 then options2 else options2 & [IsRetry=true],
+                result = Web.Contents(url, options3 & [ManualStatusHandling={429}]),
+                buffered = Binary.Buffer(result), /* avoid risk of double request */
+                status = if buffered = null then 0 else Value.Metadata(result)[Response.Status],
+                actualResult = if status = 429 then null else buffered
+            in
+                actualResult,
+        (i) => #duration(0, 0, 0, i*0.1));
+
+// https://docs.microsoft.com/en-us/power-query/helperfunctions#valuewaitfor
+// This function is useful when making an asynchronous HTTP request and you need to poll the server until the request is complete.
+Value.WaitFor = (producer as function, interval as function, optional count as number) as any =>
+    let
+        list = List.Generate(
+            () => {0, null},
+            (state) => state{0} <> null and (count = null or state{0} < count),
+            (state) => if state{1} <> null then {null, state{1}} else {1 + state{0}, Function.InvokeAfter(() => producer(state{0}), interval(state{0}))},
+            (state) => state{1})
+    in
+        List.Last(list);
 
 // Data Source Kind description
 PQGoogleSpreadsheet = [
@@ -114,8 +139,8 @@ Logout = (token) => logout_uri & token;
 // Data Source UI publishing description
 PQGoogleSpreadsheet.UI = [
     Beta = true,
-    Category = "Other",
     ButtonText = { "Google Spreadsheet Connector", "Google Spreadsheet Connector Help" },
+    Category = "File",
     SourceImage = PQGoogleSpreadsheet.Icons,
     SourceTypeImage = PQGoogleSpreadsheet.Icons
 ];
