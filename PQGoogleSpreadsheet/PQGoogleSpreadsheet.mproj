@@ -2,8 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>
-    </ProjectGuid>
+    <ProjectGuid>{2bd3d055-377f-4ad2-8362-acb114b459dd}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>MyRootNamespace</RootNamespace>
     <AssemblyName>MyAssemblyName</AssemblyName>
@@ -67,12 +66,6 @@
     <Compile Include="resources.resx">
       <SubType>Code</SubType>
     </Compile>
-    <Content Include="client_id.txt">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="client_secret.txt">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="PQGoogleSpreadsheet.query.pq">
       <SubType>Code</SubType>
     </Content>
